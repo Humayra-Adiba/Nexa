@@ -33,7 +33,7 @@ def greetMe():
     else:
         speak("Good evening, sir.")
 
-    speak("How can I help you today?")
+    speak("please tell me, how can I help you?")
 
 
 

@@ -7,9 +7,14 @@ from gtts import gTTS
 import tempfile
 import platform
 import subprocess
+import pyautogui
+import datetime
 from search import searchGoogle
 from search import searchYoutube
 from search import searchWikipedia
+from launchapp import openappweb
+from launchapp import closeappweb
+from launchapp import minimizeapp
 
   
 # Suppress warnings and sound errors
@@ -122,9 +127,12 @@ if __name__ == "__main__":
                     speak("no,Sir.I am a computer program.")
                 elif"are you a robot" in query:
                     speak("no,Sir.I am a computer program.")
+                elif"do you have a crush" in query:
+                    speak("Yes,Sir.I have crush on shihab.")
+                elif "do you wanna marry someone" in query:
+                    speak("Yes,Sir.I wanna marry shihab.")
 
-
-
+                #searching from google,youtube,wikipedia
                 elif "search google about" in query:
                     searchGoogle(query)
                 elif "search youtube about" in query:
@@ -134,6 +142,42 @@ if __name__ == "__main__":
                 elif "tell me about" in query:
                     searchWikipedia(query)
 
-                
+                #Launch app or website
+                elif "open" in query:
+                    openappweb(query)
+                elif "close" in query:
+                    closeappweb(query)
+                elif "minimize" in query:
+                    minimizeapp(query)
+
+
+                #Youtube control
+                elif "pause" in query:
+                    pyautogui.press("k")
+                    speak("video paused")
+                elif "play" in query:
+                    pyautogui.press("k")
+                    speak("video played")
+                elif "mute" in query:
+                    pyautogui.press("m")
+                    speak("video muted")
+
+                #Volume control
+                elif "volume up" in query:
+                    speak("turning the volume up, Sir")
+                    volumeup()
+                elif "volume down" in query:
+                    speak("turning the volume down, Sir")
+                    volumedown()
+
+                #Time
+                elif "the time" in query:
+                    strTime = datetime.datetime.now().strftime("%H:%M")    
+                    speak(f"Sir, the time is {strTime}")    
+
+                #exit
+                elif "finally sleep" in query:
+                    speak("going to sleep, sir. If you need anything, you can wake me up anytime.")
+                    exit()
                 
                 
