@@ -3,25 +3,18 @@ import platform
 import sys
 import subprocess
 import speech_recognition
+from gtts import gTTS
+import tempfile
+import platform
+import subprocess
 
-
+  
 # Suppress warnings and sound errors
 os.environ["ALSA_LOG_LEVEL"] = "none"
 os.environ["PYTHONWARNINGS"] = "ignore"
 sys.stderr = open(os.devnull, "w")
 
 def speak(text):
-    """
-    Speaks the given text using gTTS (Google Text-to-Speech).
-    Requires: pip install gtts
-    Also requires: sudo apt install mpg123 (Linux) or install mpg123 for Windows.
-    """
-    from gtts import gTTS
-    import tempfile
-    import platform
-    import os
-    import subprocess
-    import sys
     try:
         tts = gTTS(text=text, lang='en')
         with tempfile.NamedTemporaryFile(delete=False, suffix='.mp3') as fp:
@@ -84,3 +77,40 @@ if __name__ == "__main__":
                 if "go to sleep" in query:
                     speak("Ok sir, you can call me anytime.")
                     break
+                elif "hello" in query:
+                    speak("Hello sir, how are you ?")
+                elif "i am fine" in query:
+                    speak("That's great, sir. Do you need any help?")
+                elif "i am good" in query:
+                    speak("That's great, sir. Do you need any help?")
+                elif "i am well" in query:
+                    speak("That's great, sir. Do you need any help?")
+                elif "how are you" in query:
+                    speak("i am doing well, sir")
+                elif "thank you" in query:
+                    speak("You are welcome, sir")
+                elif "what is your name" in query:
+                    speak("I am Nexa, your Personal Desktop Voice Assistant")
+                elif "what can you do" in query:
+                    speak("I can do many things,sir.I can help to navigate your PC.I can open applications, search on the web, and much more.")
+                elif "who are you" in query:
+                    speak("I am Nexa, your Personal Desktop Voice Assistant ")
+                elif "can you tell me a joke" in query:
+                    speak("Why don't scientists trust atoms? Because they make up everything.")
+                elif "who made you" in query:
+                    speak("I was made by Humayra, a passionate crazy developer.")
+                elif "who created you" in query:
+                    speak("I was created by Humayra, a passionate crazy developer.")
+                elif "what is your purpose" in query:
+                    speak("I am here to help you, sir. I can perform many tasks for you.")
+                elif "what is your favorite color" in query:
+                    speak("I don't have a favorite color, sir. But I can help you find information about colors.")
+                elif "what is your age" in query:
+                    speak("I am a computer program, so I don't have an age, sir.")
+                elif "how old are you" in query:
+                    speak("I am a computer program, so I don't have an age, sir.")
+                elif "what is your gender" in query:
+                    speak("I am a computer program, so I don't have a gender, sir.")
+                else:
+                    speak("I don't understand that, sir. Please try again.")   
+                
