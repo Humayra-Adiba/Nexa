@@ -7,6 +7,9 @@ from gtts import gTTS
 import tempfile
 import platform
 import subprocess
+from search import searchGoogle
+from search import searchYoutube
+from search import searchWikipedia
 
   
 # Suppress warnings and sound errors
@@ -111,6 +114,26 @@ if __name__ == "__main__":
                     speak("I am a computer program, so I don't have an age, sir.")
                 elif "what is your gender" in query:
                     speak("I am a computer program, so I don't have a gender, sir.")
-                else:
-                    speak("I don't understand that, sir. Please try again.")   
+                elif"are you a artificial intelligence" in query:
+                    speak("no,Sir.I am a computer program.")
+                elif"are you a human" in query:
+                    speak("no,Sir.I am a computer program.")
+                elif"are you an ai" in query:
+                    speak("no,Sir.I am a computer program.")
+                elif"are you a robot" in query:
+                    speak("no,Sir.I am a computer program.")
+
+
+
+                elif "search google about" in query:
+                    searchGoogle(query)
+                elif "search youtube about" in query:
+                    searchYoutube(query)
+                elif"play a song" in query:
+                    searchYoutube(query)
+                elif "tell me about" in query:
+                    searchWikipedia(query)
+
+                
+                
                 
