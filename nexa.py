@@ -9,12 +9,9 @@ import platform
 import subprocess
 import pyautogui
 import datetime
-from search import searchGoogle
-from search import searchYoutube
-from search import searchWikipedia
-from launchapp import openappweb
-from launchapp import closeappweb
-from launchapp import minimizeapp
+from search import searchGoogle, searchYoutube, searchWikipedia
+from launchapp import openappweb, closeappweb, minimizeapp
+from keyboard import volumeup,volumedown
 
   
 # Suppress warnings and sound errors
@@ -186,9 +183,41 @@ if __name__ == "__main__":
                     strTime = datetime.datetime.now().strftime("%H:%M")    
                     speak(f"Sir, the time is {strTime}")    
 
+
+                #reminder
+                elif "remember that" in query:
+                    rememberMessage = query.replace("remember that", "")
+                    rememberMessage = rememberMessage.replace("nexa", "")
+                    rememberMessage = rememberMessage.strip()
+                    
+                    if rememberMessage:
+                        speak(f"You told me to remember that {rememberMessage}")
+                        try:
+                            with open("Remember.txt", "a") as remember_file:
+                                remember_file.write(f"{rememberMessage}\n")
+                            speak("I have saved that to my memory")
+                        except Exception as e:
+                            print(f"Error saving memory: {e}")
+                            speak("Sorry, I couldn't save that to my memory")
+                    else:
+                        speak("What would you like me to remember?")
+                        
+                elif "what do you remember" in query:
+                    try:
+                        with open("Remember.txt", "r") as remember_file:
+                            memories = remember_file.read().strip()
+                            if memories:
+                                speak(f"You told me to remember: {memories}")
+                            else:
+                                speak("I don't have any memories saved yet")
+                    except FileNotFoundError:
+                        speak("I don't have any memories saved yet")
+                    except Exception as e:
+                        print(f"Error reading memory: {e}")
+                        speak("Sorry, I couldn't access my memory file")
+
                 #exit
                 elif "finally sleep" in query:
                     speak("going to sleep, sir. If you need anything, you can wake me up anytime.")
                     exit()
-                
-                
+                        
