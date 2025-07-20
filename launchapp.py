@@ -1,4 +1,5 @@
 import os
+from this import d
 import pyautogui
 import webbrowser
 from time import sleep
@@ -147,3 +148,4 @@ def minimizeapp(query):
         speak("Window minimized")
     except Exception as e:
         speak("Sorry, I couldn't minimize the window")
+

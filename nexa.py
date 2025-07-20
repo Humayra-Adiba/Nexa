@@ -2,6 +2,7 @@ import os
 import platform
 import sys
 import subprocess
+from tkinter import SW
 import speech_recognition
 from gtts import gTTS
 import tempfile
@@ -11,7 +12,7 @@ import pyautogui
 import datetime
 from search import searchGoogle, searchYoutube, searchWikipedia
 from launchapp import openappweb, closeappweb, minimizeapp
-from keyboard import volumeup,volumedown
+from keyboard import volumeup, volumedown
 
   
 # Suppress warnings and sound errors
@@ -220,4 +221,3 @@ if __name__ == "__main__":
                 elif "finally sleep" in query:
                     speak("going to sleep, sir. If you need anything, you can wake me up anytime.")
                     exit()
-                        
