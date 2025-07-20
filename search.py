@@ -49,44 +49,54 @@ def speak(text):
 
 
 def searchGoogle(query):
-    if "google" in query:
-        import wikipedia as googleScrap
-        query = query.replace("nexa", "")
-        query = query.replace("google search", "")
-        query = query.replace("google", "")
-        speak("This is what I found on Google,Sir")
+    import wikipedia as googleScrap
+    query = query.replace("nexa", "")
+    query = query.replace("search google about", "")
+    query = query.replace("google search", "")
+    query = query.replace("google", "")
+    query = query.strip()
+    speak("This is what I found on Google, Sir")
 
-        try:
-            pywhatkit.search(query)
-            result = googleScrap.summary(query, 1)
-            speak(result)
+    try:
+        pywhatkit.search(query)
+        result = googleScrap.summary(query, 1)
+        speak(result)
 
-        except:
-            speak("No speakable output available,Sir")
+    except:
+        speak("No speakable output available, Sir")
 
 
 def searchYoutube(query):
-    if "youtube" in query:
-        speak("This is what I found for your search on youtube,Sir")
-        query = query.replace("youtube search", "")
-        query = query.replace("youtube", "")
-        query = query.replace("nexa", "")
-        web = "https://www.youtube.com/results?search_query=" + query
-        webbrowser.open(web)
+    speak("This is what I found for your search on youtube, Sir")
+    query = query.replace("search youtube about", "")
+    query = query.replace("play a song", "")
+    query = query.replace("youtube search", "")
+    query = query.replace("youtube", "")
+    query = query.replace("nexa", "")
+    query = query.strip()
+    
+    try:
         pywhatkit.playonyt(query)
         speak("Done, Sir")
+    except Exception as e:
+        speak("Sorry, I couldn't play that on YouTube")
 
 
 def searchWikipedia(query):
-    if "wikipedia" in query:
-        speak("Searching from Wikipedia...")
-        query = query.replace("wikipedia", "")
-        query = query.replace("tell me", "")
-        query = query.replace("nexa", "")
-        results = wikipedia.summary(query,sentences=2)
+    speak("Searching from Wikipedia...")
+    query = query.replace("tell me about", "")
+    query = query.replace("wikipedia", "")
+    query = query.replace("tell me", "")
+    query = query.replace("nexa", "")
+    query = query.strip()
+    
+    try:
+        results = wikipedia.summary(query, sentences=2)
         speak("According to Wikipedia..")
         print(results)
         speak(results)
+    except Exception as e:
+        speak("Sorry, I couldn't find information about that on Wikipedia")
 
 
 # Driver Code - Only run if this file is executed directly

@@ -85,6 +85,8 @@ if __name__ == "__main__":
                 if "go to sleep" in query:
                     speak("Ok sir, you can call me anytime.")
                     break
+
+                #conversations
                 elif "hello" in query:
                     speak("Hello sir, how are you ?")
                 elif "i am fine" in query:
@@ -127,10 +129,7 @@ if __name__ == "__main__":
                     speak("no,Sir.I am a computer program.")
                 elif"are you a robot" in query:
                     speak("no,Sir.I am a computer program.")
-                elif"do you have a crush" in query:
-                    speak("Yes,Sir.I have crush on shihab.")
-                elif "do you wanna marry someone" in query:
-                    speak("Yes,Sir.I wanna marry shihab.")
+
 
                 #searching from google,youtube,wikipedia
                 elif "search google about" in query:
@@ -144,11 +143,23 @@ if __name__ == "__main__":
 
                 #Launch app or website
                 elif "open" in query:
-                    openappweb(query)
+                    try:
+                        openappweb(query)
+                    except Exception as e:
+                        print(f"Error opening app/website: {e}")
+                        speak("Sorry, I couldn't open that")
                 elif "close" in query:
-                    closeappweb(query)
+                    try:
+                        closeappweb(query)
+                    except Exception as e:
+                        print(f"Error closing app/tab: {e}")
+                        speak("Sorry, I couldn't close that")
                 elif "minimize" in query:
-                    minimizeapp(query)
+                    try:
+                        minimizeapp(query)
+                    except Exception as e:
+                        print(f"Error minimizing window: {e}")
+                        speak("Sorry, I couldn't minimize the window")
 
 
                 #Youtube control
