@@ -10,10 +10,10 @@ import platform
 import subprocess
 import pyautogui
 import datetime
-from search import searchGoogle, searchYoutube, searchWikipedia
-from launchapp import openappweb, closeappweb, minimizeapp
-from keyboard import volumeup, volumedown
-
+from modules.greet import greetMe
+from modules.keyboard import volumeup, volumedown
+from modules.launchapp import openappweb, closeappweb, minimizeapp
+from modules.search import searchGoogle, searchYoutube, searchWikipedia
   
 # Suppress warnings and sound errors
 os.environ["ALSA_LOG_LEVEL"] = "none"
@@ -73,7 +73,6 @@ if __name__ == "__main__":
         query = takeCommand().lower()
         if "wake up" in query:
             try:
-                from greet import greetMe
                 greetMe()
             except ImportError:
                 speak("Greeting module not found. Please make sure it is in the same directory.")
@@ -100,15 +99,15 @@ if __name__ == "__main__":
                 elif "what is your name" in query:
                     speak("I am Nexa, your Personal Desktop Voice Assistant")
                 elif "what can you do" in query:
-                    speak("I can do many things,sir.I can help to navigate your PC.I can open applications, search on the web, and much more.")
+                    speak("I can do many things,sir.I can help to navigate your PC.I can open applications, search on the web,tell you the time, remember your tasks and much more.")
                 elif "who are you" in query:
                     speak("I am Nexa, your Personal Desktop Voice Assistant ")
                 elif "can you tell me a joke" in query:
                     speak("Why don't scientists trust atoms? Because they make up everything.")
                 elif "who made you" in query:
-                    speak("I was made by Humayra, a passionate crazy developer.")
+                    speak("I was made by Humayra, a passionate developer.")
                 elif "who created you" in query:
-                    speak("I was created by Humayra, a passionate crazy developer.")
+                    speak("I was created by Humayra, a passionate developer.")
                 elif "what is your purpose" in query:
                     speak("I am here to help you, sir. I can perform many tasks for you.")
                 elif "what is your favorite color" in query:

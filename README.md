@@ -1,4 +1,4 @@
-#  Nexa - Your Nexa Voice Assistant 
+#  Nexa - Your Personal Desktop Voice Assistant 
 
 Nexa is a modular, cross-platform Python voice assistant that can perform various tasks through natural voice commands. Built with a clean, maintainable architecture for easy extension and customization.
 
@@ -30,23 +30,18 @@ Nexa is a modular, cross-platform Python voice assistant that can perform variou
 ```
 Nexa/
 ├── nexa.py                 # Main application entry point
-├── config/
-│   └── settings.py         # Configuration and settings
+├── requirements.txt
+├── .gitignore
+├── installer.py            # Installer module
+├── README.md
 ├── modules/
-│   ├── apps/
-│   │   └── launchapp.py    # Application launching/control
-│   ├── search/
-│   │   └── search.py       # Web search functionality
-│   ├── memory/
-│   │   └── memory_manager.py # Memory/reminder system
-│   ├── speech/
-│   │   └── speech_manager.py # Speech recognition/TTS
-│   └── system/
-│       └── system_utils.py  # System utilities
-├── data/
-│   └── Remember.txt        # Stored memories
+│   └── greet.py            # Greeting module
+│   └── keyboard.py         # Keyboard control module
+│   └── launchapp.py        # Application launching module
+│   └── search.py           # Web search module
 ├── tests/
-├── utils/
+│   └── debug_nexa.py       # Debugging module
+│   └── test_voice.py       # Voice module
 └── nexa_env/              # Virtual environment
 ```
 
@@ -88,8 +83,6 @@ Nexa/
 ### Wake Up Nexa
 Say any of these wake words:
 - **"wake up"**
-- **"hey nexa"**
-- **"nexa"**
 
 ### Voice Commands
 
@@ -190,10 +183,3 @@ class ModuleName:
 4. Add tests if applicable
 5. Submit a pull request
 
-## License
-
-This project is open source. Feel free to use and modify as needed.
-
----
-
-**Enjoy using Nexa! **

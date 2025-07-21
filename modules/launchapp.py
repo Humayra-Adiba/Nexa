@@ -38,8 +38,8 @@ dictapp = {
     "code": "code",
     "powerpoint": "libreoffice --impress" if is_linux else "powerpnt",
     "impress": "libreoffice --impress" if is_linux else "powerpnt",
-    "discord": "discord",
-    "telegram": "telegram-desktop" if is_linux else "telegram",
+    "discord": "flatpak run com.discordapp.Discord",
+    "telegram": "flatpak run org.telegram.desktop",
     "filemanager": "nautilus" if is_linux else "explorer",
     "files": "nautilus" if is_linux else "explorer",
     "calculator": "gnome-calculator" if is_linux else "calc",
@@ -127,25 +127,61 @@ def closeappweb(query):
         except:
             print("Nexa: Sorry, there was an error with the close command")
 
-# Minimize windows
+# Minimize the currently active window in a cross-platform way
+# The strategy is:
+# 1. On Linux, prefer command-line utilities (wmctrl / xdotool) if installed.
+#    These are much more reliable than arbitrary keyboard shortcuts because
+#    they work regardless of the currently focused application or WM bindings.
+# 2. Fall back to sensible keyboard shortcuts if the utilities are missing or fail.
+# 3. On Windows, use the Win+Down shortcut that minimises the active window.
+#
+# The function now checks exit codes rather than swallowing errors so that we
+# only announce success when the operation really succeeded.
+
 def minimizeapp(query):
+    import shutil
     speak("Minimizing, sir.")
+
     try:
+        success = False
+
         if is_linux:
-            # Try multiple methods for Linux
-            try:
-                # Method 1: Use wmctrl if available
-                os.system("wmctrl -r :ACTIVE: -b add,hidden")
-            except:
+            # Prefer wmctrl if available
+            if shutil.which("wmctrl"):
+                exit_code = os.system("wmctrl -r :ACTIVE: -b add,hidden")
+                success = (exit_code == 0)
+
+            # If wmctrl failed or isn't installed, try xdotool
+            if not success and shutil.which("xdotool"):
+                exit_code = os.system("xdotool getactivewindow windowminimize")
+                success = (exit_code == 0)
+
+            # Fall back to common keyboard shortcuts recognised by most DEs
+            if not success:
                 try:
-                    # Method 2: Use xdotool if available
-                    os.system("xdotool getactivewindow windowminimize")
-                except:
-                    # Method 3: Use pyautogui as fallback
-                    pyautogui.hotkey("alt", "f9")  # Common Linux minimize shortcut
+                    # GNOME default (Super+H)
+                    pyautogui.hotkey("win", "h")
+                    success = True
+                except Exception:
+                    pass
+
+            if not success:
+                try:
+                    # Traditional Metacity/XFCE/KDE (Alt+F9)
+                    pyautogui.hotkey("alt", "f9")
+                    success = True
+                except Exception:
+                    pass
         else:
+            # Windows: Win+Down Arrow = minimise
             pyautogui.hotkey("win", "down")
-        speak("Window minimized")
+            success = True
+
+        if success:
+            speak("Window minimized")
+        else:
+            speak("Sorry, I couldn't minimize the window")
     except Exception as e:
+        print(f"Error in minimizeapp: {e}")
         speak("Sorry, I couldn't minimize the window")
 
