@@ -14,6 +14,7 @@ from modules.greet import greetMe
 from modules.keyboard import volumeup, volumedown
 from modules.launchapp import openappweb, closeappweb, minimizeapp
 from modules.search import searchGoogle, searchYoutube, searchWikipedia
+from modules.calculate import Calc
   
 # Suppress warnings and sound errors
 os.environ["ALSA_LOG_LEVEL"] = "none"
@@ -109,7 +110,7 @@ if __name__ == "__main__":
                 elif "who created you" in query:
                     speak("I was created by Humayra, a passionate developer.")
                 elif "what is your purpose" in query:
-                    speak("I am here to help you, sir. I can perform many tasks for you.")
+                    speak("I am here to help you, sir. I can perform many tasks for you.please call me anytime if you need any help.")
                 elif "what is your favorite color" in query:
                     speak("I don't have a favorite color, sir. But I can help you find information about colors.")
                 elif "what is your age" in query:
@@ -215,6 +216,16 @@ if __name__ == "__main__":
                     except Exception as e:
                         print(f"Error reading memory: {e}")
                         speak("Sorry, I couldn't access my memory file")
+
+                #calculation
+                elif "calculate" in query:
+                    try:
+                        Calc(query)
+                    except Exception as e:
+                        print(f"Calculation error: {e}")
+                        speak("Sorry, I couldn't calculate that.")
+
+
 
                 #exit
                 elif "finally sleep" in query:
