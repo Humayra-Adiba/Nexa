@@ -226,8 +226,27 @@ if __name__ == "__main__":
                         speak("Sorry, I couldn't calculate that.")
 
 
+                #shutdown
+                elif "shutdown the system" in query:
+                    speak("Are you sure you want to shut down?")
+                    shutdown = input("Do you wish to shut down your computer? (yes/no): ").strip().lower()
+
+                    if shutdown == "yes":
+                        try:
+                            os.system("sudo shutdown now")
+                        except Exception as e:
+                            print("Shutdown failed:", e)
+                            speak("I couldn't shut down the system.")
+                    elif shutdown == "no":
+                        speak("Shutdown cancelled.")
+
+
 
                 #exit
                 elif "finally sleep" in query:
                     speak("going to sleep, sir. If you need anything, you can wake me up anytime.")
                     exit()
+
+
+
+
