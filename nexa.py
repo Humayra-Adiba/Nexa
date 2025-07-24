@@ -241,6 +241,26 @@ if __name__ == "__main__":
                         speak("Shutdown cancelled.")
 
 
+                #Internet speed check
+                elif "internet speed" in query.lower():
+                    try:
+                        wifi = speedtest.Speedtest()
+                        download_net = wifi.download() / 1048576  # Bytes to Megabytes
+                        upload_net = wifi.upload() / 1048576
+
+                        download_net = round(download_net, 2)
+                        upload_net = round(upload_net, 2)
+
+                        print(f"Download Speed: {download_net} Mbps")
+                        print(f"Upload Speed: {upload_net} Mbps")
+
+                        speak(f"Your download speed is {download_net} megabits per second")
+                        speak(f"Your upload speed is {upload_net} megabits per second")
+
+                    except Exception as e:
+                        print("Speed test error:", e)
+                        speak("Sorry, I couldn't check the internet speed.")
+
 
                 #exit
                 elif "finally sleep" in query:
